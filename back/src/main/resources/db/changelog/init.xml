@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="1-seq" author="guillaumesubra1">
+        <createSequence sequenceName="user_generator" startValue="1" incrementBy="1"/>
+    </changeSet>
+
+    <changeSet id="1" author="guillaumesubra1">
+        <createTable tableName="spotify_user">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="first_name" type="varchar(50)"/>
+            <column name="last_name" type="varchar(50)"/>
+            <column name="email" type="varchar(255)">
+                <constraints unique="true" nullable="true" uniqueConstraintName="ux_user_email"/>
+            </column>
+            <column name="image_url" type="varchar(256)"/>
+            <column name="subscription" type="varchar(256)"/>
+            <column name="created" type="timestamp"/>
+            <column name="last_modified" type="timestamp"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2-seq" author="guillaumesubra1">
+        <createSequence sequenceName="song_generator" startValue="1" incrementBy="1"/>
+    </changeSet>
+
+    <changeSet id="2" author="guillaumesubra1">
+        <createTable tableName="song">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="pid" type="${uuidType}">
+                <constraints  nullable="false" unique="true" />
+            </column>
+            <column name="title" type="varchar(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="author" type="varchar(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cover" type="${blobType}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cover_content_type" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="3" author="guillaumesubra1">
+        <createTable tableName="song_content">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="file" type="${blobType}">
+                <constraints nullable="false"/>
+            </column>
+            <column name="file_content_type" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="4" author="guillaumesubra1">
+        <createTable tableName="favorite_song">
+            <column name="user_email" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="song_pid" type="${uuidType}">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addPrimaryKey tableName="favorite_song" columnNames="user_email, song_pid" constraintName="pk_user_songs"/>
+        <createIndex indexName="IX_favorite_songPK" tableName="favorite_song" unique="true">
+            <column name="song_pid"/>
+            <column name="user_email"/>
+        </createIndex>
+        <addForeignKeyConstraint baseColumnNames="song_pid" baseTableName="favorite_song" constraintName="fk_favorite_song_id" deferrable="false"
+                                 initiallyDeferred="false" referencedColumnNames="pid" referencedTableName="song" validate="true"/>
+    </changeSet>
+
+</databaseChangeLog>
