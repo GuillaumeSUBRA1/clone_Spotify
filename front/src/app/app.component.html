@@ -1,3 +1,15 @@
+<div class="position-abdolute z-2 mt-3 toast-container">
+  @for (t of toastService.toast; track t) {
+    <ngb-toast
+      [class]="t.name"
+      [autohide]="true"
+      [delay] = "1000"
+      (hidden)="toastService.remove(t)"
+    >
+      {{t.body}}
+    </ngb-toast>
+  }
+</div>
 <div class="container-fluid pt-3 vh-100">
   <div class="row height-main-row">
     <div class="d-none d-sm-none d-md-block col-md-3 col-xl-2 navigation pe-2 h-100">

@@ -5,19 +5,24 @@ import { fontAwesomeIcons } from './shared/font-awesome-icons';
 import { NavigationComponent } from './menu/navigation/navigation.component';
 import { LibraryComponent } from './menu/library/library.component';
 import { HeaderComponent } from './header/header.component';
+import { ToastService } from './service/toast.service';
+import { NgbToast } from '@ng-bootstrap/ng-bootstrap';
+import { ToastTypeEnum } from './model/toast.model';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FontAwesomeModule, NavigationComponent, LibraryComponent, HeaderComponent],
+  imports: [RouterOutlet, FontAwesomeModule, NavigationComponent, LibraryComponent, HeaderComponent,NgbToast],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
   faIconLibrary = inject(FaIconLibrary);
+  toastService = inject(ToastService);
 
   ngOnInit(): void {
     this.initIcons();
+    this.toastService.show("hello", ToastTypeEnum.SUCCESS)
   }
 
   initIcons(){
