@@ -1,0 +1,13 @@
+logging:
+  level:
+    ROOT: info
+    org.hibernate.SQL: INFO
+    fr.guillaumesubra1.clone_spotify: INFO
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/spotify
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+  liquibase:
+    contexts: prod

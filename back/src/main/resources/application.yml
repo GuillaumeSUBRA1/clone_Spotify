@@ -1,0 +1,45 @@
+logging:
+  level:
+    ROOT: info
+    org.hibernate.SQL: DEBUG
+    fr.guillaumesubra1.clone-spotify: DEBUG
+
+spring:
+  profiles:
+    active: dev
+  application:
+    name: clone-spotify
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      poolName: Hikari
+      auto-commit: false
+  data:
+    jpa:
+      repositories:
+        bootstrap-mode: deferred
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        default_schema: back
+  liquibase:
+    contexts: dev
+    change-log: classpath:db/changelog/master.xml
+    enabled: true
+  #    drop-first: true
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 100MB
+      max-request-size: 100MB
+server:
+  port: 8080
+
+#okta:
+#  oauth2:
+#    issuer: https://spotify-clone.us.auth0.com/
+#    client-id: ${auth0_client_id}
+#    client-secret: ${auth0_client_secret}
