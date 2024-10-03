@@ -1,7 +1,6 @@
-import { HttpClient, HttpErrorResponse, HttpParams, HttpStatusCode } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 import { Injectable, WritableSignal, computed, inject, signal } from '@angular/core';
 import { User } from '../model/user.model';
-import { Observable } from 'rxjs';
 import { Location } from '@angular/common';
 import { environment } from '../../environments/environment.development';
 import { State } from '../model/state.model';
