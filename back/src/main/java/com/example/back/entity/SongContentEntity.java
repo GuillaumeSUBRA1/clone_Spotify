@@ -20,4 +20,36 @@ public class SongContentEntity implements Serializable {
     byte[] file;
 
     String fileContentType;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public SongEntity getSong() {
+        return song;
+    }
+
+    public void setSong(SongEntity song) {
+        this.song = song;
+    }
+
+    public byte[] getFile() {
+        return file;
+    }
+
+    public void setFile(byte[] file) {
+        this.file = file;
+    }
+
+    public String getFileContentType() {
+        return fileContentType;
+    }
+
+    public void setFileContentType(String fileContentType) {
+        this.fileContentType = fileContentType;
+    }
 }
