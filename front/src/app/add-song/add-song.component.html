@@ -1,0 +1,68 @@
+<div class="flex-column d-flex align-items-center">
+    <div class="w-75">
+        <h1 class="mb-3 text-start">Add a song</h1>
+        <form id="createForm" (ngSubmit)="create()" [formGroup]="createForm">
+            <div class="form-Floating mb-3 text-secondary">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" id="title" [class.is-valid]="createForm.get('title')?.valid"
+                    [class.is-invalid]="createForm.get('title')?.dirty && createForm.get('title')?.invalid"
+                    placeholder="Title" formControlName="title" />
+                @if(createForm.get('title')?.dirty && createForm.get('title')?.hasError('required')){
+                <div class="invalid-feedback">
+                    Title is required
+                </div>
+                }
+            </div>
+            <div class="form-Floating mb-3 text-secondary">
+                <label for="author">Author</label>
+                <input type="text" class="form-control" id="author" [class.is-valid]="createForm.get('author')?.valid"
+                    [class.is-invalid]="createForm.get('author')?.dirty && createForm.get('author')?.invalid"
+                    placeholder="author" formControlName="author" />
+                @if(createForm.get('author')?.dirty && createForm.get('author')?.hasError('required')){
+                <div class="invalid-feedback">
+                    Author is required
+                </div>
+                }
+            </div>
+            <div class="form-Floating mb-3 text-secondary file">
+                <label for="cover">Cover</label>
+                <input type="file" class="form-control" id="cover" [class.is-valid]="createForm.get('cover')?.valid"
+                    placeholder="cover" formControlName="cover"  accept=".jpg,.jpeg,.png,.svg" (change)="uploadCover($event.target)"/>
+            </div>
+            <div class="form-Floating mb-3 text-secondary file">
+                <label for="cover">File</label>
+                <input type="file" class="form-control" id="file" [class.is-valid]="createForm.get('file')?.valid"
+                    placeholder="file" formControlName="file"  accept=".wav,.mp3" (change)="uploadFile($event.target)"/>
+            </div>
+            <div class="d-grid">
+                <button class="btn btn-primary" [disabled]="createForm.invalid || creating" type="submit">
+                    @if(!creating){
+                        <div>Add</div>
+                    } @else {
+                        <div class="d-flex align-items-center justify-content-center">
+                            <fa-icon icon="circle-notch" class="me-2" animation="spin"></fa-icon>
+                            <div>Adding in progress ...</div>
+
+                        </div>
+                    }
+                </button>
+            </div>
+        </form>
+        @if (status == flowStatus.ERROR || status == flowStatus.VALIDATION_COVER_ERROR || status == flowStatus.VALIDATION_FILE_ERROR) {
+            <ngb-alert [dismissible]="false" type="danger" class="d-flex align-items-center justify-content-center mt-3">
+                <fa-icon class="circle-xmark" class="me-2" size="2x"></fa-icon>
+                <div>
+                    @if(status==flowStatus.VALIDATION_COVER_ERROR){
+                        Something is wrong with the cover file
+                    }
+                    @if(status==flowStatus.VALIDATION_FILE_ERROR){
+                        Something is wrong with the MP3 file
+                    }
+                    @if(status==flowStatus.ERROR){
+                        Something went wrong while creating the song
+                    }
+                </div>
+            </ngb-alert>
+        }
+    </div>
+</div>
