@@ -23,6 +23,7 @@ public class SongEntity implements Serializable {
     String title;
     @Column(nullable = false)
     String author;
+    @Lob
     @Column(nullable = false)
     byte[] cover;
     @Column(nullable = false)
