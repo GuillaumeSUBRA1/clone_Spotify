@@ -34,3 +34,8 @@ export interface ReadSong extends BaseSong {
     favorite: boolean;
     play: boolean;
 }
+
+export interface SongContent extends ReadSong{
+    file?:string;
+    fileContentType?:string;
+}
