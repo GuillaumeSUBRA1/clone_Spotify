@@ -12,6 +12,8 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class SongService {
@@ -37,5 +39,14 @@ public class SongService {
 
         songContentRepository.save(content);
         return songMapper.entityToSongInfoDTO(saved);
+    }
+
+    @Transactional
+    public List<SongInfoDTO> getAll(){
+        return songRepository
+                .findAll()
+                .stream()
+                .map(songMapper::entityToSongInfoDTO)
+                .toList();
     }
 }

@@ -14,13 +14,11 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -65,5 +63,10 @@ public class SongController {
             return ResponseEntity.of(p).build();
         }
         return ResponseEntity.ok(songService.create(saveSongDTO));
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<SongInfoDTO>> getAll(){
+        return ResponseEntity.ok(songService.getAll());
     }
 }

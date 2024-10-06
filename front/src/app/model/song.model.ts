@@ -27,3 +27,10 @@ export type AddSongForm = {
     cover: FormControl<File | null>;
     file: FormControl<File | null>;
 }
+
+export interface ReadSong extends BaseSong {
+    cover?: string;
+    coverContentType?: string;
+    favorite: boolean;
+    play: boolean;
+}

@@ -1,8 +1,7 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { computed, inject, Injectable, signal, WritableSignal } from "@angular/core";
 import { State } from "../model/state.model";
-import { User } from "../model/user.model";
-import { SaveSong } from "../model/song.model";
+import { ReadSong, SaveSong } from "../model/song.model";
 import { environment } from "../../environments/environment.development";
 
 @Injectable({
@@ -13,6 +12,9 @@ export class SongService {
 
     private addSongSignal: WritableSignal<State<SaveSong, HttpErrorResponse>> = signal(State.Builder<SaveSong, HttpErrorResponse>().forInit());
     addSong = computed(() => this.addSongSignal());
+
+    private getAllSongsSignal: WritableSignal<State<Array<ReadSong>, HttpErrorResponse>> = signal(State.Builder<Array<ReadSong>, HttpErrorResponse>().forInit());
+    getAllSongs = computed(() => this.getAllSongsSignal());
 
     add(song: SaveSong) {
         const formData = new FormData();
@@ -26,8 +28,15 @@ export class SongService {
             .subscribe({
                 next: s => this.addSongSignal.set(State.Builder<SaveSong, HttpErrorResponse>().forSuccess(s)),
                 error: e => this.addSongSignal.set(State.Builder<SaveSong, HttpErrorResponse>().forError(e))
-            })
-            ;
+            });
+    }
+
+    getAll() {
+        this.http.get<Array<ReadSong>>(`${environment.API_URL}/song/all`)
+            .subscribe({
+                next: s => this.getAllSongsSignal.set(State.Builder<Array<ReadSong>, HttpErrorResponse>().forSuccess(s)),
+                error: e => this.getAllSongsSignal.set(State.Builder<Array<ReadSong>, HttpErrorResponse>().forError(e))
+            });
     }
 
     reset() {

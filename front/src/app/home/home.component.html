@@ -1,0 +1,6 @@
+<h1 class="mb-3 mt-3">Hello !</h1>
+<div class="d-flex flex-wrap">
+    @for (s of songs; track s.pid) {
+        <song class="card song-background mt-0 mb-4 ms-0 me-4"[song]="s"/>
+    }
+</div>

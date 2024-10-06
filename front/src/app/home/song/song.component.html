@@ -1,0 +1,12 @@
+<div (mouseover)="hover(true)" (mouseleave)="hover(false)">
+    <div class="card-body">
+        <img class="card-img-top card-img-bottom" [src]="'data:'+display.coverContentType+';base64,'+display.cover" alt="cover">
+        <h5 class="title mt-3">{{display.title?.value}}</h5>
+        <p class="author">{{display.author?.value}}</p>
+    </div>
+    @if (display.play) {
+        <div class="play position-absolute d-flex align-items-center" [@inOutAnimation]>
+            <fa-icon class="text-primary" [icon]="'circle-play'"></fa-icon>
+        </div>
+    }
+</div>
