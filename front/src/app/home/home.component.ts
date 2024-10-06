@@ -6,6 +6,7 @@ import { ToastService } from '../service/toast.service';
 import { ReadSong } from '../model/song.model';
 import { StatusNotificationEnum } from '../model/state.model';
 import { ToastTypeEnum } from '../model/toast.model';
+import { SongContentService } from '../service/song-content.service';
 
 @Component({
   selector: 'home',
@@ -14,18 +15,15 @@ import { ToastTypeEnum } from '../model/toast.model';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
   songService = inject(SongService);
   toastService = inject(ToastService);
+  songContentService = inject(SongContentService);
 
   songs: Array<ReadSong> = [];
 
   constructor() {
     this.listenGetAll();
-  }
-
-  ngOnInit(): void {
-    this.songService.getAll();
   }
 
   listenGetAll(){
@@ -37,5 +35,9 @@ export class HomeComponent implements OnInit {
         this.toastService.show("An error occured when fecthing songs", ToastTypeEnum.DANGER);
       }
     });
+  }
+
+  playSong(first: ReadSong){
+    this.songContentService.createQueue(first,this.songs);
   }
 }
