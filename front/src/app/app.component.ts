@@ -22,7 +22,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.initIcons();
-    this.toastService.show("hello", ToastTypeEnum.SUCCESS)
   }
 
   initIcons(){
