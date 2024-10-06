@@ -1,7 +1,7 @@
 package com.example.back.controller;
 
-import com.auth0.net.Response;
 import com.example.back.record.dto.SaveSongDTO;
+import com.example.back.record.dto.SongContentDTO;
 import com.example.back.record.dto.SongInfoDTO;
 import com.example.back.service.SongService;
 import com.example.back.service.UserService;
@@ -19,7 +19,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Controller
@@ -68,5 +70,12 @@ public class SongController {
     @GetMapping("/all")
     public ResponseEntity<List<SongInfoDTO>> getAll(){
         return ResponseEntity.ok(songService.getAll());
+    }
+
+    @GetMapping("/content")
+    public ResponseEntity<SongContentDTO> getOne(@RequestParam UUID pid){
+        Optional<SongContentDTO> song = songService.getOne(pid);
+        return song.map(ResponseEntity::ok)
+                .orElseGet(()->ResponseEntity.of(ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST,"UUID unkonw")).build());
     }
 }

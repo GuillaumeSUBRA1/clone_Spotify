@@ -5,6 +5,7 @@ import com.example.back.entity.SongEntity;
 import com.example.back.mapper.SongContentMapper;
 import com.example.back.mapper.SongMapper;
 import com.example.back.record.dto.SaveSongDTO;
+import com.example.back.record.dto.SongContentDTO;
 import com.example.back.record.dto.SongInfoDTO;
 import com.example.back.repository.SongContentRepository;
 import com.example.back.repository.SongRepository;
@@ -13,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @Transactional
@@ -48,5 +51,10 @@ public class SongService {
                 .stream()
                 .map(songMapper::entityToSongInfoDTO)
                 .toList();
+    }
+
+    public Optional<SongContentDTO> getOne(UUID pid){
+        Optional<SongContentEntity> song = songContentRepository.findBySongPid(pid);
+        return song.map(songContentMapper::entityToDTO);
     }
 }
