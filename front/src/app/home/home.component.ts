@@ -21,8 +21,10 @@ export class HomeComponent {
   songContentService = inject(SongContentService);
 
   songs: Array<ReadSong> = [];
+  loading = false;
 
   constructor() {
+    this.loading = true;
     this.listenGetAll();
   }
 
@@ -34,6 +36,7 @@ export class HomeComponent {
       } else if (state.status === StatusNotificationEnum.ERROR) {
         this.toastService.show("An error occured when fecthing songs", ToastTypeEnum.DANGER);
       }
+      this.loading = false;
     });
   }
 

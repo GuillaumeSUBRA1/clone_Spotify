@@ -1,7 +1,15 @@
 <h1 class="mb-3 mt-3">Hello !</h1>
-<div class="d-flex flex-wrap">
-    @for (s of songs; track s.pid) {
-        <song class="card song-background mt-0 mb-4 ms-0 me-4" [song]="s" 
-        (songToPlayEvent)="playSong($event)"></song>
-    }
-</div>
+@if (loading) {
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="spinner-grow text-primary loader" role="status">
+            <span class="visually-hidden"></span>
+        </div>
+    </div>
+} @else {
+    <div class="d-flex flex-wrap">
+        @for (s of songs; track s.pid) {
+            <song class="card song-background mt-0 mb-4 ms-0 me-4" [song]="s" 
+            (songToPlayEvent)="playSong($event)"></song>
+        }
+    </div>
+}

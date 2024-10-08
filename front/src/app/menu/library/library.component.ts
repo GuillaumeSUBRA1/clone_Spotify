@@ -23,11 +23,14 @@ export class LibraryComponent implements OnInit{
 
   songs: Array<ReadSong> = [];
 
+  loading = false;
+
   constructor() {
     effect(() => {
       if(this.songService.getAllSongs().status === "OK") {
         this.songs = this.songService.getAllSongs().value!;
       }
+      this.loading = false;
     });
   }
 
@@ -36,6 +39,7 @@ export class LibraryComponent implements OnInit{
   }
 
   private fetchSongs() {
+    this.loading = true;
     this.songService.getAll();
   }
 
