@@ -1,3 +1,8 @@
+export enum AuthPopupStateEnum{
+    CLOSE = "CLOSE",
+    OPEN = "OPEN",
+}
+
 export enum SubscriptionEnum{
     PRENIUM = "PRENIUM",
     FREE = "FREE",

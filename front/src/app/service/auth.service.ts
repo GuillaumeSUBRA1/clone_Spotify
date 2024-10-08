@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 import { Injectable, WritableSignal, computed, inject, signal } from '@angular/core';
-import { User } from '../model/user.model';
+import { AuthPopupStateEnum, User } from '../model/user.model';
 import { Location } from '@angular/common';
 import { environment } from '../../environments/environment.development';
 import { State } from '../model/state.model';
@@ -16,6 +16,9 @@ export class AuthService {
 
   private fetchUserWritable: WritableSignal<State<User,HttpErrorResponse>> = signal(State.Builder<User,HttpErrorResponse>().forSuccess({ email: this.notConnected }));
   fetchUser = computed(() => this.fetchUserWritable());
+
+  private authPopupWritable: WritableSignal<AuthPopupStateEnum> = signal(AuthPopupStateEnum.CLOSE);
+  authPopup = computed(() => this.authPopupWritable());
 
   fetch() {
     this.http.get<User>(`${environment.API_URL}/auth/get_authenticated_user`).subscribe({
@@ -50,5 +53,9 @@ export class AuthService {
         },
       }
     );
+  }
+
+  openOrCloseAuthPopup(state: AuthPopupStateEnum){
+    this.authPopupWritable.set(state);
   }
 }
