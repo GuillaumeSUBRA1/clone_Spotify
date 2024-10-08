@@ -78,4 +78,9 @@ public class SongController {
         return song.map(ResponseEntity::ok)
                 .orElseGet(()->ResponseEntity.of(ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST,"UUID unkonw")).build());
     }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<SongInfoDTO>> search(@RequestParam String search){
+        return ResponseEntity.ok(songService.search(search));
+    }
 }

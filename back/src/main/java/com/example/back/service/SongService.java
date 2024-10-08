@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -56,5 +57,12 @@ public class SongService {
     public Optional<SongContentDTO> getOne(UUID pid){
         Optional<SongContentEntity> song = songContentRepository.findBySongPid(pid);
         return song.map(songContentMapper::entityToDTO);
+    }
+
+    public List<SongInfoDTO> search(String search){
+        return songRepository.findByTitleOrAuthorContainingSearch(search)
+                .stream()
+                .map(songMapper::entityToSongInfoDTO)
+                .collect(Collectors.toList());
     }
 }
