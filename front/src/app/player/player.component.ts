@@ -1,7 +1,7 @@
 import { Component, effect, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { SmallSongCardComponent } from '../shared/small-song-card/small-song-card.component';
+import { ListSongCardComponent } from '../shared/list-song-card/list-song-card.component';
 import { SongContentService } from '../service/song-content.service';
 import { ReadSong, SongContent } from '../model/song.model';
 import {Howl} from "howler";
@@ -10,7 +10,7 @@ import { StatusNotificationEnum } from '../model/state.model';
 @Component({
   selector: 'player',
   standalone: true,
-  imports: [FontAwesomeModule, FormsModule, SmallSongCardComponent],
+  imports: [FontAwesomeModule, FormsModule, ListSongCardComponent],
   templateUrl: './player.component.html',
   styleUrl: './player.component.scss'
 })

@@ -42,7 +42,7 @@ export class AddSongComponent implements OnDestroy {
     effect(() => {
       this.creating = false;
       if (this.songService.addSong().status === StatusNotificationEnum.OK) {
-        //this.songService.getAll();
+        this.songService.getAll();
         this.toastService.show('Song created successfully', ToastTypeEnum.SUCCESS);
         this.router.navigate(['/']);
       } else if (this.songService.addSong().status === StatusNotificationEnum.ERROR) {
