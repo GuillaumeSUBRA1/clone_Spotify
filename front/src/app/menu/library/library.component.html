@@ -9,3 +9,10 @@
         </a>
     </div>
 </div>
+<div class="d-flex flex-column rounded-bottom-2 library-height overflow-hidden bg-dark p-2">
+    @for (s of songs; track s.pid) {
+    <div class="mt-1 library-song-card p-1">
+        <list-song-card [song]="s" (songToPlay)="onPlaySong($event)"></list-song-card>
+    </div>
+    }
+</div>
