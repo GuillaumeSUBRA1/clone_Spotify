@@ -7,11 +7,12 @@ import { ReadSong } from '../model/song.model';
 import { StatusNotificationEnum } from '../model/state.model';
 import { ToastTypeEnum } from '../model/toast.model';
 import { SongContentService } from '../service/song-content.service';
+import { FavoriteSongCardComponent } from "./favorite-song-card/favorite-song-card.component";
 
 @Component({
   selector: 'home',
   standalone: true,
-  imports: [FontAwesomeModule, SongComponent],
+  imports: [FontAwesomeModule, SongComponent, FavoriteSongCardComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
