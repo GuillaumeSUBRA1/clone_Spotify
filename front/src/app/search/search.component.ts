@@ -10,11 +10,12 @@ import { debounce, filter, interval, of, scan, switchMap, tap } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { State, StatusNotificationEnum } from '../model/state.model';
 import { ToastTypeEnum } from '../model/toast.model';
+import { FavoriteBtnComponent } from "../shared/favorite-btn/favorite-btn.component";
 
 @Component({
   selector: 'search',
   standalone: true,
-  imports: [FormsModule, FontAwesomeModule, ListSongCardComponent],
+  imports: [FormsModule, FontAwesomeModule, ListSongCardComponent, FavoriteBtnComponent],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss'
 })

@@ -6,11 +6,12 @@ import { SongContentService } from '../service/song-content.service';
 import { ReadSong, SongContent } from '../model/song.model';
 import {Howl} from "howler";
 import { StatusNotificationEnum } from '../model/state.model';
+import { FavoriteBtnComponent } from '../shared/favorite-btn/favorite-btn.component';
 
 @Component({
   selector: 'player',
   standalone: true,
-  imports: [FontAwesomeModule, FormsModule, ListSongCardComponent],
+  imports: [FontAwesomeModule, FormsModule, ListSongCardComponent, FavoriteBtnComponent],
   templateUrl: './player.component.html',
   styleUrl: './player.component.scss'
 })

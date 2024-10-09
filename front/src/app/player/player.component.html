@@ -2,6 +2,7 @@
     <div class="song-played d-flex align-items-center">
         @if (current) {
         <list-song-card [song]="current"></list-song-card>
+        <favorite-btn class="ms-4" [song]="current"></favorite-btn>
         }
     </div>
     <div class="d-flex justify-content-center align-items-center">

@@ -20,7 +20,8 @@
     } @else {
         @for(s of result; track s.pid){
             <div class="song-card-background w-100 mb-2 p-2 pe-3 d-flex align-items-center">
-                <list-song-card [song]="s" (songToPlay)="onPlay($event)"></list-song-card>
+                <list-song-card class="w-100" [song]="s" (songToPlay)="onPlay($event)"></list-song-card>
+                <favorite-btn [song]="s"></favorite-btn>
             </div>
         }
     }

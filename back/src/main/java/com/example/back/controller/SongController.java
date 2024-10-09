@@ -1,12 +1,13 @@
 package com.example.back.controller;
 
-import com.example.back.record.dto.SaveSongDTO;
-import com.example.back.record.dto.SongContentDTO;
-import com.example.back.record.dto.SongInfoDTO;
+import com.example.back.infrastructure.state.State;
+import com.example.back.infrastructure.state.StatusNotification;
+import com.example.back.record.dto.*;
 import com.example.back.service.SongService;
 import com.example.back.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Valid;
 import jakarta.validation.Validator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -82,5 +83,23 @@ public class SongController {
     @GetMapping("/search")
     public ResponseEntity<List<SongInfoDTO>> search(@RequestParam String search){
         return ResponseEntity.ok(songService.search(search));
+    }
+
+    @PostMapping("/like")
+    public ResponseEntity<FavoriteSongDTO> manageFavorite(@Valid @RequestBody FavoriteSongDTO favoriteSongDTO){
+        UserDTO user = userService.getAuthenticatedUser();
+        State<FavoriteSongDTO, String> favState = songService.manageFavorite(favoriteSongDTO, user.email());
+        if(favState.getStatus().equals(StatusNotification.ERROR)){
+            ProblemDetail p = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, favState.getError());
+            return ResponseEntity.of(p).build();
+        } else {
+            return ResponseEntity.ok(favState.getValue());
+        }
+    }
+
+    @GetMapping("/get-favorite")
+    public ResponseEntity<List<SongInfoDTO>> getFavorite(){
+        UserDTO u = userService.getAuthenticatedUser();
+        return ResponseEntity.ok(songService.getFavorite(u.email()));
     }
 }
