@@ -1,4 +1,4 @@
-package com.example.back.entity;
+package com.example.back.entity.favorite;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

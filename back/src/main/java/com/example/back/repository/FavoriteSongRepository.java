@@ -1,7 +1,7 @@
 package com.example.back.repository;
 
-import com.example.back.entity.FavoriteId;
-import com.example.back.entity.FavoriteSongEntity;
+import com.example.back.entity.favorite.FavoriteId;
+import com.example.back.entity.favorite.FavoriteSongEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

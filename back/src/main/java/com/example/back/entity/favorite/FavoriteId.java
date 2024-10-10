@@ -1,4 +1,4 @@
-package com.example.back.entity;
+package com.example.back.entity.favorite;
 
 import java.io.Serializable;
 import java.util.Objects;

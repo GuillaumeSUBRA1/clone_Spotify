@@ -1,7 +1,7 @@
 package com.example.back.service;
 
-import com.example.back.entity.FavoriteId;
-import com.example.back.entity.FavoriteSongEntity;
+import com.example.back.entity.favorite.FavoriteId;
+import com.example.back.entity.favorite.FavoriteSongEntity;
 import com.example.back.entity.SongContentEntity;
 import com.example.back.entity.SongEntity;
 import com.example.back.infrastructure.state.State;
