@@ -66,7 +66,7 @@ export class AddSongComponent implements OnDestroy {
     }
 
     this.song.title = { value: this.createForm.value.title };
-    this.song.author = { value: this.createForm.value.title };
+    this.song.author = { value: this.createForm.value.author };
 
     this.songService.add(this.song);
   }
