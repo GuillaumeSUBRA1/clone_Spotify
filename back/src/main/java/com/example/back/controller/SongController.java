@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -44,15 +45,15 @@ public class SongController {
     }
 
     @PostMapping(value = "/add", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<SongInfoDTO> add (@RequestPart(name = "cover") MultipartFile cover,
+    public ResponseEntity<SongInfoDTO> add (@RequestPart(name = "cover") @Nullable MultipartFile cover,
                                             @RequestPart(name = "file") MultipartFile file,
                                             @RequestPart(name = "dto") String saveSong) throws IOException {
         SaveSongDTO saveSongDTO = objectMapper.readValue(saveSong,SaveSongDTO.class);
         saveSongDTO = new SaveSongDTO(
                 saveSongDTO.title(),
                 saveSongDTO.author(),
-                cover.getBytes(),
-                cover.getContentType(),
+                cover != null ? cover.getBytes() : null,
+                cover != null ? cover.getContentType() : null,
                 file.getBytes(),
                 file.getContentType()
         );

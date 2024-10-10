@@ -11,8 +11,8 @@ public class SongInfoDTO {
     RecordSongTitle title;
     RecordSongAuthor author;
 
-    @NotNull byte[] cover;
-    @NotNull String coverContentType;
+    byte[] cover;
+    String coverContentType;
     @NotNull boolean isFavorite;
     @NotNull UUID pid;
 

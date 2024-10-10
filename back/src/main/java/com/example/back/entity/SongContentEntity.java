@@ -16,7 +16,6 @@ public class SongContentEntity implements Serializable {
     SongEntity song;
 
     @Lob
-    @Column(nullable = false)
     byte[] file;
 
     String fileContentType;

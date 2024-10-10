@@ -34,7 +34,7 @@ export class AddSongComponent implements OnDestroy {
   createForm = this.formBuilder.nonNullable.group<AddSongForm>({
     title: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
     author: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
-    cover: new FormControl(null, { nonNullable: true, validators: [Validators.required] }),
+    cover: new FormControl(null),
     file: new FormControl(null, { nonNullable: true, validators: [Validators.required] })
   });
 
@@ -90,6 +90,12 @@ export class AddSongComponent implements OnDestroy {
   uploadFile(target: EventTarget | null) {
     const file = this.getFile(target);
     if (file !== null) {
+      if (file.name.split("-").length === 2) {
+        this.createForm.patchValue({
+          title: file.name.split("-")[1].trim().split(".mp3")[0].split(".wma")[0],
+          author: file.name.split("-")[0].trim(),
+        });
+      }
       this.song.file = file;
       this.song.fileContentType = file.type;
     }

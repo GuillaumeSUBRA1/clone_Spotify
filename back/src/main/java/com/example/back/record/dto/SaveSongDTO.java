@@ -8,8 +8,8 @@ import jakarta.validation.constraints.NotNull;
 public record SaveSongDTO(
         @Valid RecordSongTitle title,
         @Valid RecordSongAuthor author,
-        @NotNull byte[] cover,
-        @NotNull String coverContentType,
+        byte[] cover,
+        String coverContentType,
         @NotNull byte[] file,
         @NotNull String fileContentType
         ) {
