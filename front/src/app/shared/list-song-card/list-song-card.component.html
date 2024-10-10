@@ -1,5 +1,9 @@
 <div class="d-flex w-100" (click)="play()">
-    <img class="rounded-2" width="55px" height="55px" [src]="'data:'+song().coverContentType+';base64,'+song().cover">
+    @if(this.song().cover){
+        <img class="rounded-2" width="55px" height="55px" [src]="'data:'+song().coverContentType+';base64,'+song().cover">
+    } @else {
+        <img class="rounded-2" width="55px" height="55px" [src]="'./assets/img/spotify-generic-icon.png'">
+    }
     <div class="d-flex flex-column justify-content-center ms-2">
         <div class="title mb-1">{{song().title?.value}}</div>
         <div class="author">{{song().author?.value}}</div>

@@ -1,6 +1,10 @@
 <div (click)="play()" (mouseover)="hover(true)" (mouseleave)="hover(false)">
     <div class="card-body">
-        <img class="card-img-top card-img-bottom" [src]="'data:'+display.coverContentType+';base64,'+display.cover" alt="cover">
+        @if (display.cover) {
+            <img class="card-img-top card-img-bottom" [src]="'data:'+display.coverContentType+';base64,'+display.cover" alt="cover">
+        } @else {
+            <img class="card-img-top card-img-bottom" [src]="'./assets/img/spotify-generic-icon.png'" alt="cover">
+        } 
         <h5 class="title mt-3">{{display.title?.value}}</h5>
         <p class="author">{{display.author?.value}}</p>
     </div>
