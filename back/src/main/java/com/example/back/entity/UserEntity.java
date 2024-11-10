@@ -5,7 +5,7 @@ import com.example.back.kernel.AbstractAuditingEntity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "spotify_user")
+@Table(name = "user")
 public class UserEntity extends AbstractAuditingEntity<Long> {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "userSequenceGenerator")

@@ -9,7 +9,7 @@
     </changeSet>
 
     <changeSet id="1" author="guillaumesubra1">
-        <createTable tableName="spotify_user">
+        <createTable tableName="user">
             <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
