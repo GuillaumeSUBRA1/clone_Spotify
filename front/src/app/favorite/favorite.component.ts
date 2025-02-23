@@ -6,7 +6,6 @@ import { SongService } from '../service/song.service';
 import { SongContentService } from '../service/song-content.service';
 import { StatusNotificationEnum } from '../model/state.model';
 import { ToastService } from '../service/toast.service';
-import { ToastTypeEnum } from '../model/toast.model';
 
 @Component({
   selector: 'app-favorite',
